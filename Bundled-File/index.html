@@ -35,7 +35,7 @@ document.body.appendChild(renderer.domElement);
 
 // Position the camera
 camera.position.z = 5;
-camera.position.y += 3.3;
+camera.position.y += 5;
 
 // === Camera Animation Variables ===
 // Tracks the angle of the camera as it orbits the tree
@@ -64,79 +64,105 @@ const Colors = [
     Green
 ];
 
-// === 2. Create Objects ===
-// Define the geometry once
-const geometry = new THREE.BoxGeometry(1, 1, 1);
+function Generate_Tree() {
+    // Define the geometry once
+    const geometry = new THREE.BoxGeometry(1, 1, 1);
 
-// Create the meshes
-const Tree1 = new THREE.Mesh(geometry, Brown);
-const Tree2 = new THREE.Mesh(geometry, Brown);
-const Tree3 = new THREE.Mesh(geometry, Green);
-const Tree4 = new THREE.Mesh(geometry, Green);
-const Tree5 = new THREE.Mesh(geometry, Green);
-const Tree6 = new THREE.Mesh(geometry, Green);
-const Tree7 = new THREE.Mesh(geometry, Green);
-const Tree8 = new THREE.Mesh(geometry, Green);
-const Tree9 = new THREE.Mesh(geometry, Green);
-const Tree10 = new THREE.Mesh(geometry, Green);
-const Tree11 = new THREE.Mesh(geometry, Green);
-const Tree12 = new THREE.Mesh(geometry, Green);
+    // Create the meshes
+    const Tree1 = new THREE.Mesh(geometry, Brown);
+    const Tree2 = new THREE.Mesh(geometry, Brown);
+    const Tree3 = new THREE.Mesh(geometry, Green);
+    const Tree4 = new THREE.Mesh(geometry, Green);
+    const Tree5 = new THREE.Mesh(geometry, Green);
+    const Tree6 = new THREE.Mesh(geometry, Green);
+    const Tree7 = new THREE.Mesh(geometry, Green);
+    const Tree8 = new THREE.Mesh(geometry, Green);
+    const Tree9 = new THREE.Mesh(geometry, Green);
+    const Tree10 = new THREE.Mesh(geometry, Green);
+    const Tree11 = new THREE.Mesh(geometry, Green);
+    const Tree12 = new THREE.Mesh(geometry, Green);
+    const Tree13 = new THREE.Mesh(geometry, Green);
+    const Tree14 = new THREE.Mesh(geometry, Green);
+    const Tree15 = new THREE.Mesh(geometry, Green);
+    const Tree16 = new THREE.Mesh(geometry, Green);
+    const Tree17 = new THREE.Mesh(geometry, Green);
 
-// Add the cubes to the scene
-scene.add(Tree1);
-scene.add(Tree2);
-scene.add(Tree3);
-scene.add(Tree4);
-scene.add(Tree5);
-scene.add(Tree6);
-scene.add(Tree7);
-scene.add(Tree8);
-scene.add(Tree9);
-scene.add(Tree10);
-scene.add(Tree11);
-scene.add(Tree12);
+    // Add the cubes to the scene
+    scene.add(Tree1);
+    scene.add(Tree2);
+    scene.add(Tree3);
+    scene.add(Tree4);
+    scene.add(Tree5);
+    scene.add(Tree6);
+    scene.add(Tree7);
+    scene.add(Tree8);
+    scene.add(Tree9);
+    scene.add(Tree10);
+    scene.add(Tree11);
+    scene.add(Tree12);
+    scene.add(Tree13);
+    scene.add(Tree14);
+    scene.add(Tree15);
+    scene.add(Tree16);
+    scene.add(Tree17);
 
-// Tree
-const Tree = [
-    Tree1,
-    Tree2,
-    Tree3,
-    Tree4,
-    Tree5,
-    Tree6,
-    Tree7,
-    Tree8,
-    Tree9,
-    Tree10,
-    Tree11,
-    Tree12
-];
+    // Tree
+    const Tree = [
+        Tree1,
+        Tree2,
+        Tree3,
+        Tree4,
+        Tree5,
+        Tree6,
+        Tree7,
+        Tree8,
+        Tree9,
+        Tree10,
+        Tree11,
+        Tree12,
+        Tree13,
+        Tree14,
+        Tree15,
+        Tree16,
+        Tree17
+    ];
 
-// Tree Parts Pos
-Tree2.position.y += 1;
-Tree3.position.y += 2;
-Tree4.position.y += 2;
-Tree4.position.x += 1;
-Tree5.position.y += 2;
-Tree5.position.x -= 1;
-Tree6.position.y += 2;
-Tree6.position.z -= 1;
-Tree6.position.x -= 1;
-Tree7.position.y += 2;
-Tree7.position.z -= 1;
-Tree8.position.y += 2;
-Tree8.position.z -= 1;
-Tree8.position.x += 1;
-Tree9.position.y += 3;
-Tree10.position.y += 2;
-Tree10.position.z += 1;
-Tree11.position.y += 2;
-Tree11.position.z += 1;
-Tree11.position.x -= 1;
-Tree12.position.y += 2;
-Tree12.position.z += 1;
-Tree12.position.x += 1;
+    // Tree Parts Pos
+    Tree2.position.y += 1;
+    Tree3.position.y += 2;
+    Tree4.position.y += 2;
+    Tree4.position.x += 1;
+    Tree5.position.y += 2;
+    Tree5.position.x -= 1;
+    Tree6.position.y += 2;
+    Tree6.position.z -= 1;
+    Tree6.position.x -= 1;
+    Tree7.position.y += 2;
+    Tree7.position.z -= 1;
+    Tree8.position.y += 2;
+    Tree8.position.z -= 1;
+    Tree8.position.x += 1;
+    Tree9.position.y += 3;
+    Tree10.position.y += 2;
+    Tree10.position.z += 1;
+    Tree11.position.y += 2;
+    Tree11.position.z += 1;
+    Tree11.position.x -= 1;
+    Tree12.position.y += 2;
+    Tree12.position.z += 1;
+    Tree12.position.x += 1;
+    Tree13.position.y += 4;
+    Tree14.position.y += 3;
+    Tree14.position.z -= 1;
+    Tree15.position.y += 3;
+    Tree15.position.x += 1;
+    Tree16.position.y += 3;
+    Tree16.position.x -= 1;
+    Tree17.position.y += 3;
+    Tree17.position.z += 1;
+}
 
+Generate_Tree();
 
 // === 4. The Animation Loop ===
 function animate() {
@@ -168,5 +194,4 @@ window.addEventListener('resize', () => {
 
 // Start the animation loop
 animate();
-
 </script>
