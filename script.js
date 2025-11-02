@@ -12,38 +12,23 @@ document.body.appendChild(renderer.domElement);
 // Position the camera
 camera.position.z = 5;
 
-// === 2. Create Object and Add Texture ===
+// Colors
+const Colors = [
+    White = new THREE.MeshBasicMaterial({ color: '#FFFFFF' }),
+    Gray = new THREE.MeshBasicMaterial({ color: '#737272' }),
+    Black = new THREE.MeshBasicMaterial({ color: '#000000' }),
+    Cyan = new THREE.MeshBasicMaterial({ color: '#00FFD7' }),
+    DarkBlue = new THREE.MeshBasicMaterial({ color: '#051F85' })
+];
 
-// 2a. Instantiate the TextureLoader
-const loader = new THREE.TextureLoader();
-
-// 2b. Load the texture image
-// NOTE: Replace 'path/to/your/texture.jpg' with the actual path to your image file.
-const texture = loader.load('Texures/Grass Block.png', 
-    // Callback for when the texture is successfully loaded
-    function (tex) {
-        console.log('Texture loaded successfully');
-    },
-    // Callback for progress (optional)
-    undefined,
-    // Callback for error
-    function (err) {
-        console.error('An error happened loading the texture:', err);
-    }
-);
-
-// 2c. Create the material using the loaded texture
-// We use a MeshBasicMaterial here, which works without lights.
-// The map property applies the texture to the material's color.
-const material = new THREE.MeshBasicMaterial({ map: texture });
-
-// 2d. Create the geometry and mesh as before
+// === 2. Create Object ===
 const geometry = new THREE.BoxGeometry(1, 1, 1);
-const Cube = new THREE.Mesh(geometry, material);
+const Cube = new THREE.Mesh(geometry, DarkBlue);
 scene.add(Cube);
 
 // === 4. The Animation Loop ===
 function animate() {
+    // This creates a loop that causes the renderer to draw the scene every time the screen is refreshed
     requestAnimationFrame(animate);
 
     Cube.rotation.x += 0.01;
@@ -55,10 +40,11 @@ function animate() {
 }
 
 // === 5. Handle Window Resize ===
+// Ensures the scene looks correct if the browser window is resized
 window.addEventListener('resize', () => {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth / window.innerHeight);
+    renderer.setSize(window.innerWidth, window.innerHeight);
 });
 
 // Start the animation loop
