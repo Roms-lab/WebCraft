@@ -11,29 +11,124 @@ document.body.appendChild(renderer.domElement);
 
 // Position the camera
 camera.position.z = 5;
+camera.position.y += 3.3;
+
+// === Camera Animation Variables ===
+// Tracks the angle of the camera as it orbits the tree
+let cameraAngle = 0;
+// Radius of the camera's orbit
+const orbitRadius = 5;
+
+// Colors
+// Define color materials as variables
+const White = new THREE.MeshBasicMaterial({ color: '#FFFFFF' });
+const Gray = new THREE.MeshBasicMaterial({ color: '#737272' });
+const Black = new THREE.MeshBasicMaterial({ color: '#000000' });
+const Cyan = new THREE.MeshBasicMaterial({ color: '#00FFD7' });
+const DarkBlue = new THREE.MeshBasicMaterial({ color: '#051F85' });
+const Brown = new THREE.MeshBasicMaterial({ color: '#6B3E04' });
+const Green = new THREE.MeshBasicMaterial({ color: '#047D0E' });
 
 // Colors
 const Colors = [
-    White = new THREE.MeshBasicMaterial({ color: '#FFFFFF' }),
-    Gray = new THREE.MeshBasicMaterial({ color: '#737272' }),
-    Black = new THREE.MeshBasicMaterial({ color: '#000000' }),
-    Cyan = new THREE.MeshBasicMaterial({ color: '#00FFD7' }),
-    DarkBlue = new THREE.MeshBasicMaterial({ color: '#051F85' })
+    White,
+    Gray,
+    Black,
+    Cyan,
+    DarkBlue,
+    Brown,
+    Green
 ];
 
-// === 2. Create Object ===
+// === 2. Create Objects ===
+// Define the geometry once
 const geometry = new THREE.BoxGeometry(1, 1, 1);
-const Cube = new THREE.Mesh(geometry, DarkBlue);
-scene.add(Cube);
+
+// Create the meshes
+const Tree1 = new THREE.Mesh(geometry, Brown);
+const Tree2 = new THREE.Mesh(geometry, Brown);
+const Tree3 = new THREE.Mesh(geometry, Green);
+const Tree4 = new THREE.Mesh(geometry, Green);
+const Tree5 = new THREE.Mesh(geometry, Green);
+const Tree6 = new THREE.Mesh(geometry, Green);
+const Tree7 = new THREE.Mesh(geometry, Green);
+const Tree8 = new THREE.Mesh(geometry, Green);
+const Tree9 = new THREE.Mesh(geometry, Green);
+const Tree10 = new THREE.Mesh(geometry, Green);
+const Tree11 = new THREE.Mesh(geometry, Green);
+const Tree12 = new THREE.Mesh(geometry, Green);
+
+// Add the cubes to the scene
+scene.add(Tree1);
+scene.add(Tree2);
+scene.add(Tree3);
+scene.add(Tree4);
+scene.add(Tree5);
+scene.add(Tree6);
+scene.add(Tree7);
+scene.add(Tree8);
+scene.add(Tree9);
+scene.add(Tree10);
+scene.add(Tree11);
+scene.add(Tree12);
+
+// Tree
+const Tree = [
+    Tree1,
+    Tree2,
+    Tree3,
+    Tree4,
+    Tree5,
+    Tree6,
+    Tree7,
+    Tree8,
+    Tree9,
+    Tree10,
+    Tree11,
+    Tree12
+];
+
+// Tree Parts Pos
+Tree2.position.y += 1;
+Tree3.position.y += 2;
+Tree4.position.y += 2;
+Tree4.position.x += 1;
+Tree5.position.y += 2;
+Tree5.position.x -= 1;
+Tree6.position.y += 2;
+Tree6.position.z -= 1;
+Tree6.position.x -= 1;
+Tree7.position.y += 2;
+Tree7.position.z -= 1;
+Tree8.position.y += 2;
+Tree8.position.z -= 1;
+Tree8.position.x += 1;
+Tree9.position.y += 3;
+Tree10.position.y += 2;
+Tree10.position.z += 1;
+Tree11.position.y += 2;
+Tree11.position.z += 1;
+Tree11.position.x -= 1;
+Tree12.position.y += 2;
+Tree12.position.z += 1;
+Tree12.position.x += 1;
+
 
 // === 4. The Animation Loop ===
 function animate() {
     // This creates a loop that causes the renderer to draw the scene every time the screen is refreshed
     requestAnimationFrame(animate);
 
-    Cube.rotation.x += 0.01;
-    Cube.rotation.y += 0.01;
-    Cube.rotation.z += 0.01;
+    // === Camera Animation Logic ===
+    // Increment the camera's angle for the next frame
+    cameraAngle += 0.005; // Adjust the value to change the rotation speed
+
+    // Update the camera's position on the X and Z axes to make it orbit
+    camera.position.x = Math.sin(cameraAngle) * orbitRadius;
+    camera.position.z = Math.cos(cameraAngle) * orbitRadius;
+
+    // Point the camera towards the center of the tree (the origin)
+    camera.lookAt(0, 0, 0);
 
     // Render the scene
     renderer.render(scene, camera);
