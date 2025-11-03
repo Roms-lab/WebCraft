@@ -11,7 +11,7 @@ document.body.appendChild(renderer.domElement);
 
 // Position the camera
 camera.position.z = 5;
-camera.position.y += 5;
+camera.position.y = 2;
 
 // === Camera Animation Variables ===
 // Tracks the angle of the camera as it orbits the tree
@@ -29,7 +29,7 @@ const DarkBlue = new THREE.MeshBasicMaterial({ color: '#051F85' });
 const Brown = new THREE.MeshBasicMaterial({ color: '#6B3E04' });
 const Green = new THREE.MeshBasicMaterial({ color: '#047D0E' });
 
-// Colors
+// Colors array (currently unused in the code logic, kept for reference)
 const Colors = [
     White,
     Gray,
@@ -40,11 +40,20 @@ const Colors = [
     Green
 ];
 
-function Generate_Tree() {
-    // Define the geometry once
-    const geometry = new THREE.BoxGeometry(1, 1, 1);
+// Define the geometry once
+const geometry = new THREE.BoxGeometry(1, 1, 1);
 
-    // Create the meshes
+// === Global Group Variables ===
+// We use single global variables to hold our groups of objects
+let treeGroup;
+let chunkGroup;
+
+
+function Generate_Tree() {
+    // Create a group to hold all tree parts
+    treeGroup = new THREE.Group();
+
+    // Create the meshes using const (local scope is fine now as they are added to the group)
     const Tree1 = new THREE.Mesh(geometry, Brown);
     const Tree2 = new THREE.Mesh(geometry, Brown);
     const Tree3 = new THREE.Mesh(geometry, Green);
@@ -63,47 +72,26 @@ function Generate_Tree() {
     const Tree16 = new THREE.Mesh(geometry, Green);
     const Tree17 = new THREE.Mesh(geometry, Green);
 
-    // Add the cubes to the scene
-    scene.add(Tree1);
-    scene.add(Tree2);
-    scene.add(Tree3);
-    scene.add(Tree4);
-    scene.add(Tree5);
-    scene.add(Tree6);
-    scene.add(Tree7);
-    scene.add(Tree8);
-    scene.add(Tree9);
-    scene.add(Tree10);
-    scene.add(Tree11);
-    scene.add(Tree12);
-    scene.add(Tree13);
-    scene.add(Tree14);
-    scene.add(Tree15);
-    scene.add(Tree16);
-    scene.add(Tree17);
+    // Add the cubes to the group (not directly to the scene)
+    treeGroup.add(Tree1);
+    treeGroup.add(Tree2);
+    treeGroup.add(Tree3);
+    treeGroup.add(Tree4);
+    treeGroup.add(Tree5);
+    treeGroup.add(Tree6);
+    treeGroup.add(Tree7);
+    treeGroup.add(Tree8);
+    treeGroup.add(Tree9);
+    treeGroup.add(Tree10);
+    treeGroup.add(Tree11);
+    treeGroup.add(Tree12);
+    treeGroup.add(Tree13);
+    treeGroup.add(Tree14);
+    treeGroup.add(Tree15);
+    treeGroup.add(Tree16);
+    treeGroup.add(Tree17);
 
-    // Tree
-    const Tree = [
-        Tree1,
-        Tree2,
-        Tree3,
-        Tree4,
-        Tree5,
-        Tree6,
-        Tree7,
-        Tree8,
-        Tree9,
-        Tree10,
-        Tree11,
-        Tree12,
-        Tree13,
-        Tree14,
-        Tree15,
-        Tree16,
-        Tree17
-    ];
-
-    // Tree Parts Pos
+    // Tree Parts Pos (positions are relative to the group's center)
     Tree2.position.y += 1;
     Tree3.position.y += 2;
     Tree4.position.y += 2;
@@ -136,9 +124,73 @@ function Generate_Tree() {
     Tree16.position.x -= 1;
     Tree17.position.y += 3;
     Tree17.position.z += 1;
+    
+    // Add the entire group to the scene
+    scene.add(treeGroup);
 }
 
-Generate_Tree();
+function Generate_TOP_Chunk() {
+    // Create a group to hold all chunk parts
+    chunkGroup = new THREE.Group();
+
+    // Create the meshes using const
+    const Block1 = new THREE.Mesh(geometry, Green);
+    const Block2 = new THREE.Mesh(geometry, Green);
+    const Block3 = new THREE.Mesh(geometry, Green);
+    const Block4 = new THREE.Mesh(geometry, Green);
+    const Block5 = new THREE.Mesh(geometry, Green);
+    const Block6 = new THREE.Mesh(geometry, Green);
+    const Block7 = new THREE.Mesh(geometry, Green);
+    const Block8 = new THREE.Mesh(geometry, Green);
+    const Block9 = new THREE.Mesh(geometry, Green);
+
+    // Add the cubes to the group (not directly to the scene)
+    chunkGroup.add(Block1);
+    chunkGroup.add(Block2);
+    chunkGroup.add(Block3);
+    chunkGroup.add(Block4);
+    chunkGroup.add(Block5);
+    chunkGroup.add(Block6);
+    chunkGroup.add(Block7);
+    chunkGroup.add(Block8);
+    chunkGroup.add(Block9);
+
+    // Position Blocks relative to the group center
+    Block2.position.z += 1;
+    Block3.position.z -= 1;
+    Block4.position.x += 1;
+    Block5.position.x -= 1;
+    Block6.position.z += 1;
+    Block6.position.x += 1;
+    Block7.position.z += 1;
+    Block7.position.x -= 1;
+    Block8.position.z -= 1;
+    Block8.position.x += 1;
+    Block9.position.z -= 1;
+    Block9.position.x -= 1;
+
+    // Add the entire group to the scene
+    scene.add(chunkGroup);
+}
+
+// *** This function now only needs to update the position of the single group ***
+function Move_Chunk(X, Y, Z) {
+    if (chunkGroup) {
+        // Use the Vector3 .add() method for a clean way to update position
+        chunkGroup.position.add(new THREE.Vector3(X, Y, Z));
+    }
+    // Note: If you wanted to move the tree too, you would do the same for treeGroup
+}
+
+
+// === Execution ===
+Generate_TOP_Chunk();
+Generate_Tree(); 
+
+// This will now successfully move the entire chunkGroup 
+// (and all 9 blocks within it) 10 units in X, Y, and Z.
+Move_Chunk(0, -1, 0);
+
 
 // === 4. The Animation Loop ===
 function animate() {
