@@ -12,5 +12,3 @@ https://roms-lab.github.io/WebCraft/
 **Tree Array / Mesh**
 
 **Chunk Spawn / Chunk Move**
-
-**Ps warren is cute**
